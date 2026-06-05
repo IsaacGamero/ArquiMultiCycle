@@ -17,11 +17,11 @@ module mainfsm(input  clk,
   parameter MEMREAD  = 4'b0011;
   parameter MEMWB    = 4'b0100;
   parameter MEMWRITE = 4'b0101;
-  parameter EXECUTER = 4'b0111;
+  parameter EXECUTER = 4'b0110;
+  parameter ALUWB    = 4'b0111;
   parameter EXECUTEI = 4'b1000;
-  parameter ALUWB    = 4'b1001;
-  parameter JAL      = 4'b1010;
-  parameter BEQ      = 4'b1011;
+  parameter JAL      = 4'b1001;
+  parameter BEQ      = 4'b1010;
   parameter UNKNOWN  = 4'b1100;
    
   reg [3:0] state, nextstate;
