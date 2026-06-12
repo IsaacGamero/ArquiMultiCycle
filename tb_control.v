@@ -113,7 +113,7 @@ module tb_control();
       #10; // FETCH
       #10; // DECODE
       #10; // JAL
-	  #10; // ALUWB
+      #10; // ALUWB
       #10; // FETCH
       
       // BEQ tomado
