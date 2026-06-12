@@ -1,6 +1,7 @@
 // riscvmulti.v datapath module
 module datapath(input  clk, reset,
-                input  [1:0]  ImmSrc, ALUSrcA, ALUSrcB, 
+                input  [2:0]  ImmSrc,
+                input  [1:0]  ALUSrcA, ALUSrcB, 
                 input  [1:0]  ResultSrc, 
 				input  AdrSrc,
                 input  IRWrite, PCWrite,
@@ -39,7 +40,7 @@ module datapath(input  clk, reset,
   mux3   #(32)  srcbmux(.d0(WriteData), .d1(immext), .d2(32'd4), .s(ALUSrcB), .y(SrcB));
   alu           alu_inst(.a(SrcA), .b(SrcB), .alucontrol(alucontrol), .result(ALUResult), .zero(Zero));
   flopr  #(32)  aluoutreg(.clk(clk), .reset(reset), .d(ALUResult), .q(ALUOut));
-  mux3   #(32)  resmux(.d0(ALUOut), .d1(Data), .d2(ALUResult), .s(ResultSrc), .y(Result));
+  mux4   #(32)  resmux(.d0(ALUOut), .d1(Data), .d2(ALUResult), .d3(imnext),.s(ResultSrc), .y(Result));
   
   // outputs to control unit
   assign op       = Instr[6:0];

@@ -142,6 +142,19 @@ module tb_control();
       #10; // BEQ
       #10; // FETCH
       
+      // LUI
+      reset = 1;
+      #10;
+      reset = 0;
+      op = 7'b0110111;
+      funct3 = 3'b000;
+      funct7b5 = 0;
+      Zero = 0;
+      #10; // FETCH
+      #10; // DECODE
+      #10; // BEQ
+      #10; // FETCH
+      
       #20
       
       $finish;

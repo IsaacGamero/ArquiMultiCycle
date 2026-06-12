@@ -22,6 +22,7 @@ module mainfsm(input  clk,
   parameter EXECUTEI = 4'b1000;
   parameter JAL      = 4'b1001;
   parameter BEQ      = 4'b1010;
+  parameter LUI      = 4'b1011;
   parameter UNKNOWN  = 4'b1100;
    
   reg [3:0] state, nextstate;
@@ -44,6 +45,7 @@ module mainfsm(input  clk,
                 7'b0010011:      nextstate = EXECUTEI; //I-type ALU
                 7'b1101111:      nextstate = JAL; // jal
                 7'b1100011:      nextstate = BEQ; // beq
+                7'b0110111:      nextstate = LUI; //lui
                 default:         nextstate = UNKNOWN;
               endcase
       MEMADR: casez(op)
@@ -59,6 +61,7 @@ module mainfsm(input  clk,
       JAL:      nextstate = ALUWB;
       ALUWB:    nextstate = FETCH;
       BEQ:      nextstate = FETCH;
+      LUI:      nextstate = FETCH;
       default:  nextstate = FETCH;
     endcase
     
@@ -77,6 +80,7 @@ module mainfsm(input  clk,
       ALUWB:    controls = 15'b0_00_00_10_0_0_0_1_0_00_0;
       JAL:      controls = 15'b0_01_01_00_0_0_1_0_0_00_0;
       BEQ:      controls = 15'b0_10_00_10_0_0_0_0_0_01_1;
+      LUI:      controls = 15'b00_00_00_11_0_0_1_0_00_0;
       default: 	controls = 15'bxx_xx_xx_x_xxxx_xx_x;
     endcase
 
